@@ -28,6 +28,9 @@ function draw(context, value, min, max, config) {
         // Clear background
         context.clearRect(_rect.x, _rect.y, _rect.width, _rect.height);
 
+        // Detect if we haven't received a real value yet (initial state)
+        // Usually initial state comes through as the raw format string, like "{1}" or undefined
+        const isUnknown = (!value || value === '{1}' || value === 'null');
         const isActive = (value === 'active' || value === 'true' || value === '1');
 
         const cx = _rect.x + _rect.width / 2;
@@ -37,17 +40,26 @@ function draw(context, value, min, max, config) {
         // Background circle
         context.beginPath();
         context.arc(cx, cy, radius, 0, 2 * Math.PI, false);
-        context.fillStyle = isActive ? '#00e600' : '#ff0000';
+        
+        if (isUnknown) {
+            context.fillStyle = '#666666'; // Gray for unknown/loading
+        } else {
+            context.fillStyle = isActive ? '#00e600' : '#ff0000';
+        }
         context.fill();
 
-        // Icon inside (checkmark or cross)
+        // Icon inside (checkmark, cross, or dash)
         context.lineWidth = 2;
         context.strokeStyle = 'white';
         context.lineCap = 'round';
         context.lineJoin = 'round';
         context.beginPath();
 
-        if (isActive) {
+        if (isUnknown) {
+            // Dash (loading state)
+            context.moveTo(cx - radius/2.5, cy);
+            context.lineTo(cx + radius/2.5, cy);
+        } else if (isActive) {
             // Checkmark
             context.moveTo(cx - radius/2.5, cy);
             context.lineTo(cx - radius/8, cy + radius/2.5);

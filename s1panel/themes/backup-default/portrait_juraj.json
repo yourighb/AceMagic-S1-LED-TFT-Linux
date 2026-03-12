@@ -362,91 +362,50 @@
                "group": 1,
                "name": "bar_chart",
                "rect": {
-                  "x": 90,
-                  "y": 125,
-                  "width": 10,
-                  "height": 35
-               },
-               "sensor": true,
-               "value": "memory",
-               "format": "{12}",
-               "refresh": 1000,
-               "debug_frame": true,
-               "outline": "#ffffff",
-               "fill": "#ffffff",
-               "points": 1,
-               "thickness": 10,
-               "zoom": 0,
-               "horizontal": false
-            },
-            {
-               "id": 8,
-               "group": 1,
-               "name": "bar_chart",
-               "rect": {
-                  "x": 10,
-                  "y": 125,
-                  "width": 10,
-                  "height": 35
+                  "x": 0,
+                  "y": 122,
+                  "width": 170,
+                  "height": 10
                },
                "sensor": true,
                "value": "memory",
                "format": "{10}",
                "refresh": 1000,
-               "debug_frame": true,
+               "debug_frame": false,
                "outline": "#ffffff",
                "fill": "#d7ecee",
                "points": 1,
-               "thickness": 10,
+               "thickness": 15,
                "zoom": 0,
-               "horizontal": false
+               "horizontal": true
+            },
+            {
+               "id": 8,
+               "group": 1,
+               "name": "text",
+               "rect": {
+                  "x": 5,
+                  "y": 134,
+                  "width": 40,
+                  "height": 15
+               },
+               "sensor": false,
+               "value": "RAM",
+               "format": "",
+               "refresh": 1000,
+               "debug_frame": false,
+               "font": "12px Arial",
+               "color": "#26ff00",
+               "align": "left"
             },
             {
                "id": 9,
                "group": 1,
                "name": "text",
                "rect": {
-                  "x": 104,
-                  "y": 127,
-                  "width": 62,
-                  "height": 15
-               },
-               "sensor": true,
-               "value": "memory",
-               "format": "{15}",
-               "refresh": 1000,
-               "debug_frame": false,
-               "font": "11px Arial",
-               "color": "#26ff00",
-               "align": "left"
-            },
-            {
-               "id": 10,
-               "group": 1,
-               "name": "text",
-               "rect": {
-                  "x": 105,
-                  "y": 148,
-                  "width": 30,
-                  "height": 16
-               },
-               "sensor": false,
-               "value": "swap",
-               "format": "",
-               "refresh": 1000,
-               "debug_frame": false,
-               "font": "10px Arial",
-               "color": "#26ff00",
-               "align": "left"
-            },
-            {
-               "id": 11,
-               "group": 1,
-               "name": "text",
-               "rect": {
-                  "x": 25,
-                  "y": 127,
-                  "width": 62,
+                  "x": 90,
+                  "y": 134,
+                  "width": 80,
                   "height": 15
                },
                "sensor": true,
@@ -454,27 +413,55 @@
                "format": "{14}",
                "refresh": 1000,
                "debug_frame": false,
-               "font": "10px Arial",
+               "font": "12px Arial",
                "color": "#26ff00",
+               "align": "right"
+            },
+            {
+               "id": 10,
+               "group": 1,
+               "name": "text",
+               "rect": {
+                  "x": 0,
+                  "y": 150,
+                  "width": 60,
+                  "height": 12
+               },
+               "sensor": false,
+               "value": "tailscale",
+               "font": "11px Arial",
+               "color": "#ffffff",
                "align": "left"
+            },
+            {
+               "id": 11,
+               "group": 1,
+               "name": "service_status",
+               "rect": {
+                  "x": 50,
+                  "y": 149,
+                  "width": 14,
+                  "height": 14
+               },
+               "sensor": true,
+               "value": "systemd_tailscaled",
+               "format": "{1}",
+               "refresh": 5000
             },
             {
                "id": 12,
                "group": 1,
                "name": "text",
                "rect": {
-                  "x": 25,
-                  "y": 148,
-                  "width": 30,
-                  "height": 16
+                  "x": 80,
+                  "y": 150,
+                  "width": 60,
+                  "height": 12
                },
                "sensor": false,
-               "value": "used",
-               "format": "",
-               "refresh": 1000,
-               "debug_frame": false,
+               "value": "openclaw",
                "font": "11px Arial",
-               "color": "#26ff00",
+               "color": "#ffffff",
                "align": "left"
             },
             {
@@ -483,7 +470,7 @@
                "name": "line_chart",
                "rect": {
                   "x": 0,
-                  "y": 164,
+                  "y": 182,
                   "width": 170,
                   "height": 35
                },
@@ -503,7 +490,7 @@
                "name": "bar_chart",
                "rect": {
                   "x": 0,
-                  "y": 201,
+                  "y": 219,
                   "width": 170,
                   "height": 10
                },
@@ -525,7 +512,7 @@
                "name": "text",
                "rect": {
                   "x": 5,
-                  "y": 212,
+                  "y": 230,
                   "width": 15,
                   "height": 15
                },
@@ -544,7 +531,7 @@
                "name": "text",
                "rect": {
                   "x": 90,
-                  "y": 212,
+                  "y": 230,
                   "width": 80,
                   "height": 15
                },
@@ -563,7 +550,7 @@
                "name": "line_chart",
                "rect": {
                   "x": 0,
-                  "y": 245,
+                  "y": 263,
                   "width": 170,
                   "height": 35
                },
@@ -583,7 +570,7 @@
                "name": "bar_chart",
                "rect": {
                   "x": 0,
-                  "y": 282,
+                  "y": 300,
                   "width": 170,
                   "height": 10
                },
@@ -605,7 +592,7 @@
                "name": "text",
                "rect": {
                   "x": 5,
-                  "y": 293,
+                  "y": 311,
                   "width": 15,
                   "height": 15
                },
@@ -624,7 +611,7 @@
                "name": "text",
                "rect": {
                   "x": 90,
-                  "y": 293,
+                  "y": 311,
                   "width": 80,
                   "height": 15
                },
@@ -636,6 +623,83 @@
                "font": "12px Arial",
                "color": "#26ff00",
                "align": "right"
+            },
+            {
+               "id": 100,
+               "group": 1,
+               "name": "service_status",
+               "rect": {
+                  "x": 135,
+                  "y": 149,
+                  "width": 14,
+                  "height": 14
+               },
+               "sensor": true,
+               "value": "systemd_openclaw",
+               "format": "{1}",
+               "refresh": 5000
+            },
+            {
+               "id": 101,
+               "group": 1,
+               "name": "text",
+               "rect": {
+                  "x": 0,
+                  "y": 165,
+                  "width": 60,
+                  "height": 12
+               },
+               "sensor": false,
+               "value": "cron",
+               "font": "11px Arial",
+               "color": "#ffffff",
+               "align": "left"
+            },
+            {
+               "id": 102,
+               "group": 1,
+               "name": "service_status",
+               "rect": {
+                  "x": 50,
+                  "y": 164,
+                  "width": 14,
+                  "height": 14
+               },
+               "sensor": true,
+               "value": "systemd_cron",
+               "format": "{1}",
+               "refresh": 5000
+            },
+            {
+               "id": 103,
+               "group": 1,
+               "name": "text",
+               "rect": {
+                  "x": 80,
+                  "y": 165,
+                  "width": 60,
+                  "height": 12
+               },
+               "sensor": false,
+               "value": "ssh",
+               "font": "11px Arial",
+               "color": "#ffffff",
+               "align": "left"
+            },
+            {
+               "id": 104,
+               "group": 1,
+               "name": "service_status",
+               "rect": {
+                  "x": 135,
+                  "y": 164,
+                  "width": 14,
+                  "height": 14
+               },
+               "sensor": true,
+               "value": "systemd_ssh",
+               "format": "{1}",
+               "refresh": 5000
             }
          ],
          "duration": 60000,

@@ -14,9 +14,9 @@
                "name": "line_chart",
                "rect": {
                   "x": 0,
-                  "y": 10,
+                  "y": 0,
                   "width": 170,
-                  "height": 25
+                  "height": 39
                },
                "sensor": true,
                "value": "cpu_usage",
@@ -34,7 +34,7 @@
                "name": "text",
                "rect": {
                   "x": 5,
-                  "y": 36,
+                  "y": 40,
                   "width": 50,
                   "height": 20
                },
@@ -53,7 +53,7 @@
                "name": "text",
                "rect": {
                   "x": 130,
-                  "y": 36,
+                  "y": 40,
                   "width": 37,
                   "height": 20
                },
@@ -72,7 +72,7 @@
                "name": "text",
                "rect": {
                   "x": 57,
-                  "y": 36,
+                  "y": 40,
                   "width": 65,
                   "height": 20
                },
@@ -90,9 +90,9 @@
                "group": 1,
                "name": "bar_chart",
                "rect": {
-                  "x": 0,
+                  "x": 49,
                   "y": 60,
-                  "width": 170,
+                  "width": 121,
                   "height": 10
                },
                "sensor": true,
@@ -108,32 +108,13 @@
                "horizontal": true
             },
             {
-               "id": 8,
-               "group": 1,
-               "name": "text",
-               "rect": {
-                  "x": 5,
-                  "y": 72,
-                  "width": 40,
-                  "height": 15
-               },
-               "sensor": false,
-               "value": "RAM",
-               "format": "",
-               "refresh": 1000,
-               "debug_frame": false,
-               "font": "12px Arial",
-               "color": "#26ff00",
-               "align": "left"
-            },
-            {
                "id": 9,
                "group": 1,
                "name": "text",
                "rect": {
-                  "x": 90,
-                  "y": 72,
-                  "width": 80,
+                  "x": 5,
+                  "y": 59,
+                  "width": 40,
                   "height": 15
                },
                "sensor": true,
@@ -141,7 +122,7 @@
                "format": "{14}",
                "refresh": 1000,
                "debug_frame": false,
-               "font": "12px Arial",
+               "font": "bold 11px Arial",
                "color": "#26ff00",
                "align": "right"
             },
@@ -435,9 +416,9 @@
                "name": "text",
                "rect": {
                   "x": 0,
-                  "y": 275,
+                  "y": 295,
                   "width": 170,
-                  "height": 22
+                  "height": 25
                },
                "sensor": true,
                "value": "log_activity",
@@ -445,7 +426,7 @@
                "refresh": 2000,
                "debug_frame": false,
                "font": "22px Arial",
-               "color": "#aaaaaa",
+               "color": "#0fff2b",
                "align": "center"
             }
          ],

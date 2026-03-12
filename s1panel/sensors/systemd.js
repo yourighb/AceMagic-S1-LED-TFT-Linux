@@ -5,14 +5,11 @@
 const { exec } = require('child_process');
 const logger = require('../logger');
 
-function get_service_status(serviceName) {
+function get_service_status(serviceName, userService) {
     return new Promise((resolve) => {
-        exec(`systemctl is-active ${serviceName}`, (err, stdout, stderr) => {
-            if (stdout.trim() === 'active') {
-                resolve(true);
-            } else {
-                resolve(false);
-            }
+        const userFlag = userService ? '--user ' : '';
+        exec(`systemctl ${userFlag}is-active ${serviceName}`, (err, stdout, stderr) => {
+            resolve(stdout.trim() === 'active');
         });
     });
 }
@@ -20,9 +17,9 @@ function get_service_status(serviceName) {
 function sample(rate, format, config) {
     return new Promise((fulfill, reject) => {
         const _service = config._private.service;
-        get_service_status(_service).then(isActive => {
+        const _user = config._private.user_service;
+        get_service_status(_service, _user).then(isActive => {
             const statusStr = isActive ? 'active' : 'inactive';
-            
             const _output = format.replace(/{(\d+)}/g, function (match, number) {
                 switch (number) {
                     case '0': return _service;
@@ -30,7 +27,6 @@ function sample(rate, format, config) {
                     default: return 'null';
                 }
             });
-            
             fulfill({ value: _output, min: 0, max: 1 });
         }).catch(err => {
             fulfill({ value: 'error', min: 0, max: 1 });
@@ -41,17 +37,16 @@ function sample(rate, format, config) {
 function init(config) {
     if (!config) { config = {}; }
     const _private = {
-        service: config.service || 'openclaw'
+        service: config.service || 'openclaw',
+        user_service: config.user_service || false
     };
     config._private = _private;
-    
-    logger.info('initialize: systemd sensor set to ' + _private.service);
+    const prefix = _private.user_service ? 'user:' : '';
+    logger.info('initialize: systemd sensor set to ' + prefix + _private.service);
     return 'systemd_' + _private.service;
 }
 
-function stop() {
-    return Promise.resolve();
-}
+function stop() { return Promise.resolve(); }
 
 function settings() {
     return {
@@ -61,14 +56,10 @@ function settings() {
         multiple: true,
         ident: [ 'service' ],
         fields: [
-            { name: 'service', type: 'string', value: 'openclaw' }
+            { name: 'service', type: 'string', value: 'openclaw-gateway' },
+            { name: 'user_service', type: 'bool', value: false }
         ]
     };
 }
 
-module.exports = {
-    init,
-    settings,
-    sample,
-    stop
-};
+module.exports = { init, settings, sample, stop };

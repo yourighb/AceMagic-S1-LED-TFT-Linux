@@ -96,7 +96,8 @@
       {
          "module": "sensors/systemd.js",
          "config": {
-            "service": "openclaw"
+            "service": "openclaw-gateway",
+            "user_service": true
          }
       },
       {
@@ -110,6 +111,9 @@
          "config": {
             "service": "ssh"
          }
+      },
+      {
+         "module": "sensors/file_status.js"
       }
    ],
    "widgets": [

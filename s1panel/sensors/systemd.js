@@ -7,7 +7,7 @@ const logger = require('../logger');
 
 function get_service_status(serviceName, userFlagStr) {
     return new Promise((resolve) => {
-        exec(`${userFlagStr}systemctl is-active ${serviceName}`, (err, stdout, stderr) => {
+        exec(`${userFlagStr} is-active ${serviceName}`, (err, stdout, stderr) => {
             resolve(stdout.trim() === 'active');
         });
     });
@@ -41,11 +41,14 @@ function init(config) {
     };
     
     if (_private.user) {
-        // Find user ID for XDG_RUNTIME_DIR
-        const uid = require('child_process').execSync(`id -u ${_private.user}`).toString().trim();
-        _private.userFlagStr = `sudo -u ${_private.user} XDG_RUNTIME_DIR=/run/user/${uid} systemctl --user `;
+        try {
+            const uid = require('child_process').execSync(`id -u ${_private.user}`).toString().trim();
+            _private.userFlagStr = `sudo -u ${_private.user} XDG_RUNTIME_DIR=/run/user/${uid} systemctl --user`;
+        } catch(e) {
+            _private.userFlagStr = 'systemctl';
+        }
     } else {
-        _private.userFlagStr = 'systemctl ';
+        _private.userFlagStr = 'systemctl';
     }
     
     config._private = _private;

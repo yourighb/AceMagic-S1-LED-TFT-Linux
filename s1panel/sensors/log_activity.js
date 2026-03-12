@@ -20,7 +20,7 @@ function check_status() {
     try {
         const stats = fs.statSync(logFile);
         const diffSecs = (Date.now() - stats.mtimeMs) / 1000;
-        if (diffSecs < 15) {
+        if (diffSecs < 5) {
             return 'running';
         } else {
             return 'idle';

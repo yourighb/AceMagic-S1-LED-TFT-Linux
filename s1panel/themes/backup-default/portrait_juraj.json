@@ -78,7 +78,7 @@
                },
                "sensor": true,
                "value": "cpu_temp",
-               "format": "{0}°C",
+               "format": "{0} °C",
                "refresh": 1000,
                "debug_frame": false,
                "font": "12px Arial",
@@ -156,7 +156,7 @@
                   "height": 12
                },
                "sensor": false,
-               "value": "tailscale",
+               "value": "TailScale",
                "font": "11px Arial",
                "color": "#ffffff",
                "align": "left"
@@ -181,13 +181,13 @@
                "group": 1,
                "name": "text",
                "rect": {
-                  "x": 80,
+                  "x": 95,
                   "y": 88,
                   "width": 60,
                   "height": 12
                },
                "sensor": false,
-               "value": "openclaw-gw",
+               "value": "OpenClaw",
                "font": "11px Arial",
                "color": "#ffffff",
                "align": "left"
@@ -357,7 +357,7 @@
                "group": 1,
                "name": "service_status",
                "rect": {
-                  "x": 135,
+                  "x": 156,
                   "y": 87,
                   "width": 14,
                   "height": 14
@@ -378,7 +378,7 @@
                   "height": 12
                },
                "sensor": false,
-               "value": "cron",
+               "value": "RustDesk",
                "font": "11px Arial",
                "color": "#ffffff",
                "align": "left"
@@ -394,7 +394,7 @@
                   "height": 14
                },
                "sensor": true,
-               "value": "systemd_cron",
+               "value": "systemd_rustdesk",
                "format": "{1}",
                "refresh": 5000
             },
@@ -403,13 +403,13 @@
                "group": 1,
                "name": "text",
                "rect": {
-                  "x": 80,
+                  "x": 95,
                   "y": 103,
                   "width": 60,
                   "height": 12
                },
                "sensor": false,
-               "value": "ssh",
+               "value": "SSH",
                "font": "11px Arial",
                "color": "#ffffff",
                "align": "left"
@@ -419,7 +419,7 @@
                "group": 1,
                "name": "service_status",
                "rect": {
-                  "x": 135,
+                  "x": 156,
                   "y": 102,
                   "width": 14,
                   "height": 14
@@ -437,19 +437,19 @@
                   "x": 0,
                   "y": 275,
                   "width": 170,
-                  "height": 14
+                  "height": 22
                },
                "sensor": true,
-               "value": "file_status",
+               "value": "log_activity",
                "format": "{0}",
                "refresh": 2000,
                "debug_frame": false,
-               "font": "11px Arial",
+               "font": "22px Arial",
                "color": "#aaaaaa",
                "align": "center"
             }
          ],
-         "duration": 0,
+         "duration": 60000,
          "led_config": {
             "theme": 4,
             "intensity": 3,

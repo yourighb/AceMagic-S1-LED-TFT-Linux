@@ -97,13 +97,7 @@
          "module": "sensors/systemd.js",
          "config": {
             "service": "openclaw-gateway",
-            "user_service": true
-         }
-      },
-      {
-         "module": "sensors/systemd.js",
-         "config": {
-            "service": "cron"
+            "user": "yr"
          }
       },
       {
@@ -113,7 +107,13 @@
          }
       },
       {
-         "module": "sensors/file_status.js"
+         "module": "sensors/log_activity.js"
+      },
+      {
+         "module": "sensors/systemd.js",
+         "config": {
+            "service": "rustdesk"
+         }
       }
    ],
    "widgets": [

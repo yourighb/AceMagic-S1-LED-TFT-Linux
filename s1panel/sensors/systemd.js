@@ -3,59 +3,55 @@
  * s1panel - sensor/systemd
  */
 const { exec } = require('child_process');
-const os = require('os');
 const logger = require('../logger');
 
-function get_service_status(serviceName, userService) {
+function get_service_status(serviceName, userFlagStr) {
     return new Promise((resolve) => {
-        let cmd, execOpts = {};
-        if (userService) {
-            // Must set XDG_RUNTIME_DIR + DBUS address so systemctl --user
-            // works even when called from a system service context (no D-Bus session).
-            const uid = os.userInfo().uid;
-            const xdgDir = `/run/user/${uid}`;
-            execOpts.env = {
-                ...process.env,
-                XDG_RUNTIME_DIR: xdgDir,
-                DBUS_SESSION_BUS_ADDRESS: `unix:path=${xdgDir}/bus`
-            };
-            cmd = `systemctl --user is-active ${serviceName}`;
-        } else {
-            cmd = `systemctl is-active ${serviceName}`;
-        }
-        exec(cmd, execOpts, (err, stdout) => {
+        exec(`${userFlagStr}systemctl is-active ${serviceName}`, (err, stdout, stderr) => {
             resolve(stdout.trim() === 'active');
         });
     });
 }
 
 function sample(rate, format, config) {
-    return new Promise((fulfill) => {
+    return new Promise((fulfill, reject) => {
         const _service = config._private.service;
-        const _user = config._private.user_service;
-        get_service_status(_service, _user).then(isActive => {
+        const _userStr = config._private.userFlagStr;
+        get_service_status(_service, _userStr).then(isActive => {
             const statusStr = isActive ? 'active' : 'inactive';
-            const _output = format.replace(/{(\d+)}/g, (m, n) => {
-                switch (n) {
+            const _output = format.replace(/{(\d+)}/g, function (match, number) {
+                switch (number) {
                     case '0': return _service;
                     case '1': return statusStr;
                     default: return 'null';
                 }
             });
             fulfill({ value: _output, min: 0, max: 1 });
+        }).catch(err => {
+            fulfill({ value: 'error', min: 0, max: 1 });
         });
     });
 }
 
 function init(config) {
     if (!config) { config = {}; }
-    config._private = {
-        service: config.service || 'openclaw-gateway',
-        user_service: config.user_service || false
+    const _private = {
+        service: config.service || 'openclaw',
+        user: config.user || null
     };
-    const prefix = config._private.user_service ? 'user:' : '';
-    logger.info('initialize: systemd sensor set to ' + prefix + config._private.service);
-    return 'systemd_' + config._private.service;
+    
+    if (_private.user) {
+        // Find user ID for XDG_RUNTIME_DIR
+        const uid = require('child_process').execSync(`id -u ${_private.user}`).toString().trim();
+        _private.userFlagStr = `sudo -u ${_private.user} XDG_RUNTIME_DIR=/run/user/${uid} systemctl --user `;
+    } else {
+        _private.userFlagStr = 'systemctl ';
+    }
+    
+    config._private = _private;
+    const prefix = _private.user ? `user:${_private.user}:` : '';
+    logger.info('initialize: systemd sensor set to ' + prefix + _private.service);
+    return 'systemd_' + _private.service;
 }
 
 function stop() { return Promise.resolve(); }
@@ -66,10 +62,10 @@ function settings() {
         description: 'monitor systemd service status',
         icon: 'pi-cog',
         multiple: true,
-        ident: ['service'],
+        ident: [ 'service' ],
         fields: [
             { name: 'service', type: 'string', value: 'openclaw-gateway' },
-            { name: 'user_service', type: 'bool', value: false }
+            { name: 'user', type: 'string', value: '' }
         ]
     };
 }

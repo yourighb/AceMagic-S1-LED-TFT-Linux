@@ -43,7 +43,7 @@ function init(config) {
     if (_private.user) {
         try {
             const uid = require('child_process').execSync(`id -u ${_private.user}`).toString().trim();
-            _private.userFlagStr = `sudo -u ${_private.user} XDG_RUNTIME_DIR=/run/user/${uid} systemctl --user`;
+            _private.userFlagStr = `sudo -u ${_private.user} env XDG_RUNTIME_DIR=/run/user/${uid} DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/${uid}/bus systemctl --user`;
         } catch(e) {
             _private.userFlagStr = 'systemctl';
         }
